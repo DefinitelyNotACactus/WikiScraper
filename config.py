@@ -1,9 +1,23 @@
+from special_pages import special_prefixes
+
+# https://en.wikipedia.org/wiki/Wikipedia:Page_name
+# https://en.wikipedia.org/wiki/Category:Restricted_titles
+# https://en.wikipedia.org/wiki/Wikipedia:Naming_conventions_(technical_restrictions)
+# https://en.wikipedia.org/wiki/Template:Correct_title
+# https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Dom%C3%ADnio
+# https://m.mediawiki.org/wiki/Manual:%24wgLegalTitleChars
+# https://datatracker.ietf.org/doc/html/rfc3986#section-3.3
+
+FILTER_SPECIAL_URLS = True # Se links que levam a páginas especiais devem ser impressas (ver special_pages.py)
+FULL_LINKS = False # Se deve imprimir o endereço completo de links e imagens
 
 # Padrões
 # SUBPATH genérico
 URL_SUBPATH = '([\w!@$&:=%,\*\'\-\+\.\(\)]+)'
 # URL de artigo
-URL_PATTERN = '(https?://)?pt\.wikipedia\.org/wiki/'+URL_SUBPATH
+URL_PATTERN_BASE = '(https?://)?pt\.wikipedia\.org/wiki/'
+URL_PATTERN = URL_PATTERN_BASE+URL_SUBPATH
+SPECIAL_URL_PATTERN = URL_PATTERN_BASE + '({}):'.format('|'.join(special_prefixes)) + URL_SUBPATH
 # Container principal
 CONTAINER_PATTERN = '<main id="content" class="mw-body" role="main">([\S\s]+?)</main>'
 # Título do artigo
@@ -13,11 +27,11 @@ INDEX_PATTERN = '<li class="toclevel-\d+( tocsection-\d+)?"><a href="#(.*?)"><sp
 # Link para outro artigo
 LINK_PATTERN = '<a href="/wiki/'+URL_SUBPATH+'"( class="mw-redirect")? title="(.*?)">'
 # Prefixo de Links (em consonância com o padrão anterior)
-LINK_PREFIX_PATTERN = 'https://pt.wikipedia.org/wiki/'
+LINK_PREFIX = 'https://pt.wikipedia.org/wiki/'
 # Imagem
 IMAGE_PATTERN = '<a href="/wiki/Ficheiro:'+URL_SUBPATH+'" class="image"( title="(.*?)")?>'
 # Prefixo de Imagens (em consonância com o padrão anterior)
-IMAGE_PREFIX_PATTERN = LINK_PREFIX_PATTERN + 'Ficheiro:'
+IMAGE_PREFIX = LINK_PREFIX + 'Ficheiro:'
 # Cores de texto
 ENDC = '\033[0m'
 BOLD = '\033[1m'

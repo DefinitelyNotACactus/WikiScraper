@@ -21,17 +21,22 @@ class InterpreterEngine:
         for i in index:
             yield { 'titulo': i[4], 'numeração': i[2], 'nivel': i[2].count('.') }
 
+    def is_special_url(self, url):
+        return re.fullmatch(SPECIAL_URL_PATTERN, url)
+
     # Função para obter os links para outros artigos
-    def get_links(self):
+    def get_links(self, filter_special_urls=False):
         links_all = re.findall(LINK_PATTERN, self.code)
         links = {link[0]: link[2] for link in links_all}
         for (link, link_title) in links.items():
-            yield { 'titulo': unquote(link_title), 'link': link, 'full_link': LINK_PREFIX_PATTERN + link }
+            if filter_special_urls and self.is_special_url(LINK_PREFIX + link):
+                continue
+            yield { 'titulo': unquote(link_title), 'link': link, 'full_link': LINK_PREFIX + link }
 
     # Obter os nomes dos arquivos de imagens
     def get_images(self):
         images_all = re.findall(IMAGE_PATTERN, self.code)
-        images = {image[0]: image[2] if len(image) == 3 else 'Sem titulo' for image in images_all} # Uso de dicionário para evitar a exibição de duplicatas
+        images = {image[0]: image[2] for image in images_all} # Uso de dicionário para evitar a exibição de duplicatas
         for (image, image_title) in images.items():
-            yield { 'titulo': image_title, 'arquivo': image, 'full_link': IMAGE_PREFIX_PATTERN + image }
+            yield { 'titulo': image_title, 'arquivo': image, 'full_link': IMAGE_PREFIX + image }
 

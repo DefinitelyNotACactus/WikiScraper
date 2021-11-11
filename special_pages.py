@@ -1,0 +1,36 @@
+# Esses são os prefixos das páginas especiais da Wikipedia, como descrito em:
+# https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Dom%C3%ADnio
+
+special_prefixes = [
+    'Especial',
+    'Discussão',
+    'Discuss%C3%A3o',
+    'Usuário(a)',
+    'Usu%C3%A1rio(a)',
+    'Usuário(a)_Discussão',
+    'Usu%C3%A1rio(a)_Discuss%C3%A3o',
+    'Wikipédia',
+    'Wikip%C3%A9dia',
+    'Wikipédia_Discussão',
+    'Wikip%C3%A9dia_Discuss%C3%A3o',
+    'Ficheiro',
+    'Ficheiro_Discussão',
+    'Ficheiro_Discuss%C3%A3o',
+    'MediaWiki',
+    'MediaWiki_Discussão',
+    'MediaWiki_Discuss%C3%A3o',
+    'Predefinição',
+    'Predefini%C3%A7%C3%A3o',
+    'Predefinição_Discussão',
+    'Predefini%C3%A7%C3%A3o_Discuss%C3%A3o',
+    'Ajuda',
+    'Ajuda_Discussão',
+    'Ajuda_Discuss%C3%A3o',
+    'Categoria',
+    'Categoria_Discussão',
+    'Categoria_Discuss%C3%A3o',
+    'Portal',
+    'Portal_Discussão',
+    'Portal_Discuss%C3%A3o',
+    'TimedText'
+]
