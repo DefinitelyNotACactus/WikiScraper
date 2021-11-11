@@ -26,7 +26,7 @@ class EngineBrowserCLI:
                 print('A URL informada é válida, acessando o artigo...')
                 self.navigate(link)
                 while True:
-                    print('\n==============================================')
+                    print('==============================================')
                     print('Artigo acessado: %s' % (self.engine.title))
                     option = eof_input('Opções:\n1 - Ver índices do artigo' +
                         '\n2 - Ver os links para outros artigos citados' +
