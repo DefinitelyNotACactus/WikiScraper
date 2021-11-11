@@ -25,10 +25,10 @@ class EngineBrowserCLI:
             if re.search(URL_PATTERN, link):
                 print('A URL informada é válida, acessando o artigo...')
                 self.navigate(link)
-                print('Artigo acessado: %s' % (self.engine.title))
                 while True:
+                    print('Artigo acessado: %s' % (self.engine.title))
                     print('==============================================')
-                    option = eof_input('Opções:\n1 - Ver índice do artigo' +
+                    option = eof_input('Opções:\n1 - Ver índices do artigo' +
                         '\n2 - Ver os links para outros artigos citados' +
                         '\n3 - Obter os nomes dos arquivos de imagens do artigo' +
                     '\nAlternativamente, insira qualquer coisa para procurar por outro artigo\n')
@@ -58,8 +58,15 @@ class EngineBrowserCLI:
         if len(links) > 0:
             print('Lista de links para outros artigos da Wikipédia citados pelo artigo %s' % (self.engine.title))
             print('==============================================')
-            for l in links:
-                print('Título: %s \nLink: %s' % (l['titulo'], l['link']))
+            for li, l in enumerate(links):
+                print(' (%d) %s : %s' % (li, l['titulo'], l['link']))
+            
+            print('Para visitar um dos links acima, insira o seu número correspondente.')
+            print('Para retornar, pressione ENTER: ', end='')
+            opt = input().strip()
+            if opt.isdigit():
+                self.navigate('https://pt.wikipedia.org'+links[int(opt)]['link'])
+        
         else: # O artigo não cita nenhum outro artigo
             print('O artigo não possui links para outros artigos.')
 
@@ -70,6 +77,6 @@ class EngineBrowserCLI:
             print('Lista de imagens do artigo')
             print('==============================================')
             for im in images:
-                print('Nome do arquivo: %s\nTítulo: %s' % (im['arquivo'], im['titulo']))
+                print(' %s : %s' % (im['titulo'] or '*', im['arquivo']))
         else:
             print('O artigo não contém imagens.')
