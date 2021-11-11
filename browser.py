@@ -26,8 +26,8 @@ class EngineBrowserCLI:
                 print('A URL informada é válida, acessando o artigo...')
                 self.navigate(link)
                 while True:
+                    print('\n==============================================')
                     print('Artigo acessado: %s' % (self.engine.title))
-                    print('==============================================')
                     option = eof_input('Opções:\n1 - Ver índices do artigo' +
                         '\n2 - Ver os links para outros artigos citados' +
                         '\n3 - Obter os nomes dos arquivos de imagens do artigo' +
@@ -65,7 +65,8 @@ class EngineBrowserCLI:
             print('Para retornar, pressione ENTER: ', end='')
             opt = input().strip()
             if opt.isdigit():
-                self.navigate('https://pt.wikipedia.org'+links[int(opt)]['link'])
+                self.navigate(''+links[int(opt)]['full_link'])
+            print()
         
         else: # O artigo não cita nenhum outro artigo
             print('O artigo não possui links para outros artigos.')
