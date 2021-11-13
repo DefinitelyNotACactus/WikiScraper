@@ -1,3 +1,4 @@
+from sys import argv
 from special_pages import special_prefixes
 
 # https://en.wikipedia.org/wiki/Wikipedia:Page_name
@@ -8,12 +9,14 @@ from special_pages import special_prefixes
 # https://m.mediawiki.org/wiki/Manual:%24wgLegalTitleChars
 # https://datatracker.ietf.org/doc/html/rfc3986#section-3.3
 
-FILTER_SPECIAL_URLS = True # Se links que levam a páginas especiais devem ser impressas (ver special_pages.py)
-FULL_LINKS = False # Se deve imprimir o endereço completo de links e imagens
+# Se links que levam a páginas especiais devem ser impressas (ver special_pages.py)
+FILTER_SPECIAL_URLS = not '--specials' in argv
+# Se deve imprimir o endereço completo de links e imagens
+FULL_LINKS = '--full-links' in argv
 
 # Padrões
 # SUBPATH genérico
-URL_SUBPATH = '([\w!@$&:=%,\*\'\-\+\.\(\)]+)'
+URL_SUBPATH = '([\w!#@$&:=%,\*\'\-\+\.\(\)]+)'
 # URL de artigo
 URL_PATTERN_BASE = '(https?://)?pt\.wikipedia\.org/wiki/'
 URL_PATTERN = URL_PATTERN_BASE+URL_SUBPATH
