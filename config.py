@@ -17,6 +17,7 @@ URL_SUBPATH = '([\w!@$&:=%,\*\'\-\+\.\(\)]+)'
 # URL de artigo
 URL_PATTERN_BASE = '(https?://)?pt\.wikipedia\.org/wiki/'
 URL_PATTERN = URL_PATTERN_BASE+URL_SUBPATH
+# URL de página especial
 SPECIAL_URL_PATTERN = URL_PATTERN_BASE + '({}):'.format('|'.join(special_prefixes)) + URL_SUBPATH
 # Container principal
 CONTAINER_PATTERN = '<main id="content" class="mw-body" role="main">([\S\s]+?)</main>'
