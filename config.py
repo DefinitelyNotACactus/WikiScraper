@@ -25,7 +25,7 @@ SPECIAL_URL_PATTERN = URL_PATTERN_BASE + '({}):'.format('|'.join(special_prefixe
 # Container principal
 CONTAINER_PATTERN = '<main id="content" class="mw-body" role="main">([\S\s]+?)</main>'
 # Título do artigo
-TITLE_PATTERN = '<title>(.*?)( – Wikipédia, a enciclopédia livre)</title>'
+TITLE_PATTERN = '<title>(.*?)( – Wikipédia, a enciclopédia livre)?</title>'
 # Índice de um artigo
 INDEX_PATTERN = '<li class="toclevel-\d+( tocsection-\d+)?"><a href="#(.*?)"><span class="tocnumber">(\d+(\.\d+)*)</span> <span class="toctext">(.*?)(<sup>(.*?)</sup>)?</span>'
 # Link para outro artigo
