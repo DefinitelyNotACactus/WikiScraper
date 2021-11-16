@@ -36,6 +36,8 @@ LINK_PREFIX = 'https://pt.wikipedia.org/wiki/'
 IMAGE_PATTERN = '<a href="/wiki/Ficheiro:'+URL_SUBPATH+'" class="image"( title="(.*?)")?>'
 # Prefixo de Imagens (em consonância com o padrão anterior)
 IMAGE_PREFIX = LINK_PREFIX + 'Ficheiro:'
+# Artigo não existe
+NO_ARTICLE = '<b>A Wikipédia não possui um artigo com este nome exato\.</b>'
 # Cores de texto
 ENDC = '\033[0m'
 BOLD = '\033[1m'

@@ -13,7 +13,7 @@ class EngineBrowserCLI:
     def navigate(self, url) -> InterpreterEngine:
         self.engine = InterpreterEngine(url) if isinstance(url, str) else url
         return self.engine
-    
+
     def main_loop(self):
         def eof_input(*args, **kwargs):
             try:
@@ -30,6 +30,10 @@ class EngineBrowserCLI:
                 while True:
                     print('==============================================')
                     print('Artigo acessado: %s' % (self.engine.title))
+                    if self.article_exists() is False: 
+                        print('%sERRO: O artigo não existe%s' % (config.BOLD, config.ENDC))
+                        print('==============================================')
+                        break
                     option = eof_input('Opções:\n1 - Ver índices do artigo' +
                         '\n2 - Ver os links para outros artigos citados' +
                         '\n3 - Obter os nomes dos arquivos de imagens do artigo' +
@@ -41,6 +45,10 @@ class EngineBrowserCLI:
                     else: break
             else:
                 print('A URL "%s" não é válida.' % (link))
+
+    # Função para determinar se o artigo que está sendo acessado existe
+    def article_exists(self):
+        return self.engine.article_exists()
 
     # Função para obter os tópicos e imprimi-los
     def get_topics(self):

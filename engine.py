@@ -15,6 +15,11 @@ class InterpreterEngine:
             self.code = self.full_code # excessivo de links e imagens podem acabar sendo capturados
         self.title = re.findall(TITLE_PATTERN, self.full_code)[0][0]
 
+    # Função para determinar se o artigo que está sendo acessado existe
+    # Quando o artigo não existe, o link leva à uma página com uma mensagem padrão
+    def article_exists(self):
+        return len(re.findall(NO_ARTICLE, self.code)) == 0
+
     # Função para obter os tópicos e imprimi-los
     def get_topics(self):
         index = re.findall(INDEX_PATTERN, self.code)
