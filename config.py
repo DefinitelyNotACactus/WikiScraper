@@ -16,7 +16,7 @@ FULL_LINKS = '--full-links' in argv
 
 # Padrões
 # SUBPATH genérico
-URL_SUBPATH = '([\w!#@$&:=%,\*\'\-\+\.\(\)]+)'
+URL_SUBPATH = '([\w!#@$&:=%,\*\'\-\+\.\(\)\\\\/]+)'
 # URL de artigo
 URL_PATTERN_BASE = '(https?://)?pt\.wikipedia\.org/wiki/'
 URL_PATTERN = URL_PATTERN_BASE+URL_SUBPATH
