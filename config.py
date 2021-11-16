@@ -1,6 +1,7 @@
 from sys import argv
 from special_pages import special_prefixes
 
+# Referências:
 # https://en.wikipedia.org/wiki/Wikipedia:Page_name
 # https://en.wikipedia.org/wiki/Category:Restricted_titles
 # https://en.wikipedia.org/wiki/Wikipedia:Naming_conventions_(technical_restrictions)
@@ -17,6 +18,9 @@ FULL_LINKS = '--full-links' in argv
 # Padrões
 # SUBPATH genérico
 URL_SUBPATH = '([\w!#@$&:=%,\*\'\-\+\.\(\)\\\\/]+)'
+# URL_SUBPATH = '(.+)' # Fallback
+# Os caracteres utilizados foram extraídos das referências acimas e testados contra os exemplos de README.md
+
 # URL de artigo
 URL_PATTERN_BASE = '(https?://)?pt\.wikipedia\.org/wiki/'
 URL_PATTERN = URL_PATTERN_BASE+URL_SUBPATH
