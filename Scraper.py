@@ -5,4 +5,7 @@ def main():
     cli.main_loop()
 
 if __name__ == '__main__':
-    main()
+    from sys import argv
+    if '-h' in argv or '--help' in argv:
+        print('Usage: python Scrapper.py [--specials] [--full-links]')
+    else: main()
