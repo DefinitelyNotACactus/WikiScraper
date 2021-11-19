@@ -40,8 +40,9 @@ class InterpreterEngine:
 
     # Obter os nomes dos arquivos de imagens
     def get_images(self):
-        images_all = re.findall(IMAGE_PATTERN, self.code)
-        images = {image[0]: image[2] for image in images_all} # Uso de dicionário para evitar a exibição de duplicatas
-        for (image, image_title) in images.items():
-            yield { 'titulo': image_title, 'arquivo': image, 'full_link': IMAGE_PREFIX + image }
+        #images_all = re.findall(IMAGE_PATTERN, self.code)
+        images_all = re.findall(OUTER_IMAGE_PATTERN, self.code)
+        images = {re.findall(IMAGE_SRC_PATTERN, image)[2] for image in images_all} # Uso de dicionário para evitar a exibição de duplicatas
+        for image in images:
+            yield { 'arquivo': image }
 

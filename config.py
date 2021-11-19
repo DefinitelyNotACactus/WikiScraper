@@ -34,6 +34,9 @@ LINK_PATTERN = '<a href="/wiki/'+URL_SUBPATH+'"( class="mw-redirect")? title="(.
 LINK_PREFIX = 'https://pt.wikipedia.org/wiki/'
 # Imagem
 IMAGE_PATTERN = '<a href="/wiki/Ficheiro:'+URL_SUBPATH+'" class="image"( title="(.*?)")?>'
+OUTER_IMAGE_PATTERN = '<img(.*?)>'
+IMAGE_ALT_PATTERN = 'alt="(.*?)"'
+IMAGE_SRC_PATTERN = 'src="//upload\.wikimedia\.org/wikipedia/commons/thumb/(.*?)/(.*?)/'+URL_SUBPATH+'/?(.*?)?"'
 # Prefixo de Imagens (em consonância com o padrão anterior)
 IMAGE_PREFIX = LINK_PREFIX + 'Ficheiro:'
 # Artigo não existe
