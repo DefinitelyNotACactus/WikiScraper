@@ -88,6 +88,6 @@ class EngineBrowserCLI:
             print('Lista de imagens do artigo')
             print('==============================================')
             for im in images:
-                print(' %s' % (im['arquivo']))
+                print(' %s : %s' % (im['titulo'] or '*', im['full_link' if self.full_links else 'arquivo']))
         else:
             print('O artigo não contém imagens.')

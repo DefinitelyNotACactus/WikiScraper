@@ -7,6 +7,8 @@ from config import *
 class InterpreterEngine:
     def __init__(self, url, code=None):
         self.url = url
+        if isinstance(url, str) and not url.startswith('http'):
+            url = 'https://' + url.lstrip(':/')
         self.full_code = code or requests.get(url, headers=HEADERS).text
         extr = re.search(CONTAINER_PATTERN, self.full_code)
         if extr: self.code = extr.group(0)
@@ -40,9 +42,21 @@ class InterpreterEngine:
 
     # Obter os nomes dos arquivos de imagens
     def get_images(self):
-        #images_all = re.findall(IMAGE_PATTERN, self.code)
-        images_all = re.findall(OUTER_IMAGE_PATTERN, self.code)
-        images = {re.findall(IMAGE_SRC_PATTERN, image)[2] for image in images_all} # Uso de dicionário para evitar a exibição de duplicatas
-        for image in images:
-            yield { 'arquivo': image }
+        def inner_extract(img_tag):
+            image_link = re.findall(IMAGE_SRC_PATTERN, img_tag)[0]
+            image_title = re.findall(IMAGE_ALT_PATTERN, img_tag)[0]
+            image_file = image_link.split('/')[-1]
+            return { 'titulo': unquote(image_title), 'arquivo': image_file, 'full_link': image_link, 'set_link': image_link }
+        def outer_extract(a):
+            i = inner_extract(a[3])
+            l = IMAGE_PREFIX + a[0]
+            return { 'titulo': a[2] or i['titulo'], 'arquivo': a[0] or i['arquivo'], 'full_link': l or i['set_link'], 'set_link': i['set_link'] }
+        images_all =  [outer_extract(i) for i in re.findall(IMAGE_PATTERN, self.code)]
+        images_all += [inner_extract(i) for i in re.findall(OUTER_IMAGE_PATTERN, self.code)]
+        images_set = set() # Uso de set para evitar a exibição de duplicatas
+        for img in images_all:
+            if img['set_link'] in images_set:
+                continue
+            images_set.add(img['set_link'])
+            yield img
 
