@@ -9,7 +9,13 @@ class InterpreterEngine:
         self.url = url
         if isinstance(url, str) and not url.startswith('http'):
             url = 'https://' + url.lstrip(':/')
-        self.full_code = code or requests.get(url, headers=HEADERS).text
+        if code:
+            self._request_code = None
+            self.full_code = code
+        else:
+            self._request = requests.get(url, headers=HEADERS)
+            self._request_code = self._request.status_code
+            self.full_code = self._request.text
         extr = re.search(CONTAINER_PATTERN, self.full_code)
         if extr: self.code = extr.group(0)
         else:
@@ -20,6 +26,7 @@ class InterpreterEngine:
     # Função para determinar se o artigo que está sendo acessado existe
     # Quando o artigo não existe, o link leva à uma página com uma mensagem padrão
     def article_exists(self):
+        if not self._request_code is None: return self._request_code != 404
         return len(re.findall(NO_ARTICLE, self.code)) == 0
 
     # Função para obter os tópicos e imprimi-los
