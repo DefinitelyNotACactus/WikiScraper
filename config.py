@@ -37,11 +37,14 @@ LINK_PATTERN = '<a href="/wiki/'+URL_SUBPATH+'"( class="mw-redirect")? title="(.
 # Prefixo de Links (em consonância com o padrão anterior)
 LINK_PREFIX = 'https://pt.wikipedia.org/wiki/'
 # Imagem
-IMAGE_PATTERN = '<a href="/wiki/Ficheiro:'+URL_SUBPATH+'" class="image"( title="(.*?)")?>'
+OUTER_IMAGE_PATTERN = '<img(.*?)>'
+IMAGE_ALT_PATTERN = 'alt="(.*?)"'
+IMAGE_SRC_PATTERN = 'src="(.*?)"'
+IMAGE_PATTERN = '<a href="/wiki/Ficheiro:'+URL_SUBPATH+'" class="image"( title="(.*?)")?>'+OUTER_IMAGE_PATTERN
 # Prefixo de Imagens (em consonância com o padrão anterior)
 IMAGE_PREFIX = LINK_PREFIX + 'Ficheiro:'
 # Artigo não existe
-NO_ARTICLE = '<b>A Wikipédia não possui um artigo com este nome exato\.</b>'
+NO_ARTICLE = '<b>A Wikipédia não possui um \w+ com este nome exato\.</b>'
 # Cores de texto
 ENDC = '\033[0m'
 BOLD = '\033[1m'
